@@ -1,15 +1,26 @@
 Package: Rmleda
-Title: What the Package Does (One Line, Title Case)
+Title: R package that helps with preliminary eda for supervised machine learning tasks
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+  c(person(given = "Saule",
+           family = "Atymtayeva",
+           role = c("aut", "cre")),
+    person(given = "Sang Yoon",
+           family = "Lee",
+           role = c("aut", "cre")),
+    person(given = "Yazan",
+           family = "Saleh",
+           role = c("aut", "cre")),
+    person(given = "Tanmay",
+           family = "Sharma",
+           role = c("aut", "cre")))
+Description: The project aims to build a R package called Rmleda with relevant 
+             functions to help with preliminary EDA for a given dataset. The package contains 
+             functions and classes that help perform various data preparation and 
+             wrangling tasks such as data splitting, exploration, imputation, and scaling. 
+             These functionalities were identified as commonly-performed tasks in supervised 
+             machine learning settings but may provide value in other project types as well.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
