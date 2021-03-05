@@ -4,16 +4,17 @@ Version: 0.0.0.9000
 Authors@R: 
   c(person(given = "Saule",
            family = "Atymtayeva",
-           role = c("aut", "cre")),
+           role = c("aut", "cre"),
+           email = "sa080388@student.ubc.ca"),
     person(given = "Sang Yoon",
            family = "Lee",
-           role = c("aut", "cre")),
+           role = c("aut")),
     person(given = "Yazan",
            family = "Saleh",
-           role = c("aut", "cre")),
+           role = c("aut")),
     person(given = "Tanmay",
            family = "Sharma",
-           role = c("aut", "cre")))
+           role = c("aut")))
 Description: The project aims to build a R package called Rmleda with relevant 
              functions to help with preliminary EDA for a given dataset. The package contains 
              functions and classes that help perform various data preparation and 
