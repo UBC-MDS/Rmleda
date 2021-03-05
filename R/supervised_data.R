@@ -21,5 +21,13 @@
 #' @export
 #'
 #' @examples
+#' set.seed(1353)
+#' cars <- supervised_data(mtcars, xcols = ['mpg', 'cyl', 'disp'], ycols=['hp'])
+#' train_data <- cars$train
+#' test_data <- cars$test
+#' x_train <- cars$xtrain
+#' y_train <- cars$ytrain
+#' x_test <- cars$xtest
+#' y_test <- cars$ytest
 supervised_data <-  function(data, xcols, ycols, ...) {
 }
