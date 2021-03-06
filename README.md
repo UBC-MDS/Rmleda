@@ -80,9 +80,6 @@ devtools::install_github("UBC-MDS/Rmleda")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-#library(Rmleda)
-## basic example code
+```
+// TODO
 ```
