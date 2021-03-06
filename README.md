@@ -34,7 +34,7 @@ The `Rmleda` package will include the following classes/functions:
 The `Rmleda` package is intended to help with EDA for supervised machine
 learning tasks; there are other existing packages that contain some
 similar functionality. For example, the packages, namely
-[tidymodels](https://CRAN.R-project.org/package=tidymodels)
+[tidymodels](https://CRAN.R-project.org/package=tidymodels),
 [`MICE`](https://CRAN.R-project.org/package=mice),
 [`Amelia`](https://CRAN.R-project.org/package=Amelia),
 [`missForest`](https://CRAN.R-project.org/package=missForest),
