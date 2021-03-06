@@ -6,7 +6,7 @@
 #' @param data the original dataset to be used for splitting
 #' @param xcols a vector containing feature names (X) to be used as independent variables
 #' @param ycols a vector containing target names (y) to be used as dependent variables or labels
-#' @param ...  Additional parameters to pass to `tidymodels`'s `initial_split` function. See `tidymodels` \link[=https://www.rdocumentation.org/packages/rsample/versions/0.0.9/topics/initial_split]{documentation} for more details
+#' @param ...  Additional parameters to pass to the `initial_split` function in `tidymodels`. See `tidymodels` \href{https://www.rdocumentation.org/packages/rsample/versions/0.0.9/topics/initial_split}{documentation} for more details
 #'
 #' @return A list of the following components.
 #' \itemize{
@@ -22,7 +22,7 @@
 #'
 #' @examples
 #' set.seed(1353)
-#' cars <- supervised_data(mtcars, xcols = ['mpg', 'cyl', 'disp'], ycols=['hp'])
+#' cars <- supervised_data(mtcars, xcols = c('mpg', 'cyl', 'disp'), ycols=c('hp'))
 #' train_data <- cars$train
 #' test_data <- cars$test
 #' x_train <- cars$xtrain
