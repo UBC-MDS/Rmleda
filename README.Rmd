@@ -23,7 +23,7 @@ The goal of Rmleda is to build a R package called `Rmleda` with relevant functio
 
 The `Rmleda` package will include the following classes/functions:
 
--   `SupervisedData` is a wrapper class that splits a dataframe into train and test sets and further into X and y subsets based on a list of user-provided columns.
+-   `SupervisedData` is a function that splits a Data Frame into train and test sets and further into X and y subsets based on a list of user-provided columns.
 
 -   `dftype()` function will return the type of columns and variables for the input data frame. Furthermore, if there are non-numeric columns, it will return the unique values of non-numeric columns and their length.
 
