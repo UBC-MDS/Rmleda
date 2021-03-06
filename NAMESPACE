@@ -2,4 +2,5 @@
 
 export(dfscaling)
 export(dftype)
+export(autoimpute_na)
 export(supervised_data)
