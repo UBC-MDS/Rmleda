@@ -13,7 +13,7 @@ supervised_data(data, xcols, ycols, ...)
 
 \item{ycols}{a vector containing target names (y) to be used as dependent variables or labels}
 
-\item{...}{Additional parameters to pass to \code{tidymodels}'s \code{initial_split} function. See \code{tidymodels} \link[=https://www.rdocumentation.org/packages/rsample/versions/0.0.9/topics/initial_split]{documentation} for more details}
+\item{...}{Additional parameters to pass to the \code{initial_split} function in \code{tidymodels}. See \code{tidymodels} \href{https://www.rdocumentation.org/packages/rsample/versions/0.0.9/topics/initial_split}{documentation} for more details}
 }
 \value{
 A list of the following components.
@@ -33,7 +33,7 @@ while providing convenient access to \code{X} and \code{y} portions of both the 
 }
 \examples{
 set.seed(1353)
-cars <- supervised_data(mtcars, xcols = ['mpg', 'cyl', 'disp'], ycols=['hp'])
+cars <- supervised_data(mtcars, xcols = c('mpg', 'cyl', 'disp'), ycols=c('hp'))
 train_data <- cars$train
 test_data <- cars$test
 x_train <- cars$xtrain
