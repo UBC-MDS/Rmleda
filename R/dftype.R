@@ -17,6 +17,7 @@
 #' results$summary
 #' results$unique_df
 #'
+library(tidyverse)
 dftype <- function(df){
 
   # Check the type of dataframe is a dataframe
