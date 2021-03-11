@@ -67,7 +67,6 @@ test_that("Check that errors are raised with invalid inputs", {
     col3 = c(0, 1, 1, 0, 0, 0, 1, 0, 0, 1)
   )
 
-
   expect_error(supervised_data(1,
                                xcols = c('col1', 'col2'),
                                ycols = c('col3')))
