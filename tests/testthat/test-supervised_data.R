@@ -59,3 +59,25 @@ test_that("Check that the y portions of the data only contain the Y columns", {
   expect_equal(c('col3'), dimnames(result$y_train)[[2]])
   expect_equal(c('col3'), dimnames(result$y_test)[[2]])
 })
+
+test_that("Check that errors are raised with invalid inputs", {
+  toy_data = tibble::tibble(
+    col1 = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+    col2 = c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
+    col3 = c(0, 1, 1, 0, 0, 0, 1, 0, 0, 1)
+  )
+
+
+  expect_error(supervised_data(1,
+                               xcols = c('col1', 'col2'),
+                               ycols = c('col3')))
+
+  expect_error(supervised_data(toy_data,
+                               xcols = 1,
+                               ycols = c('col3')))
+
+
+  expect_error(supervised_data(toy_data,
+                               xcols = c('col1', 'col2'),
+                               ycols = 1))
+})
