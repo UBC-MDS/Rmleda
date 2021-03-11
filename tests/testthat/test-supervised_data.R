@@ -28,3 +28,17 @@ test_that("Check that data splits are of correct sizes", {
 })
 
 
+test_that("Check that the x portions of the data only contain the X columns", {
+  toy_data = tibble::tibble(
+    col1 = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+    col2 = c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
+    col3 = c(0, 1, 1, 0, 0, 0, 1, 0, 0, 1)
+  )
+  result <-
+    supervised_data(toy_data,
+                    xcol = c('col1', 'col2'),
+                    ycol = c('col3'))
+
+  expect_equal(c('col1', 'col2'), dimnames(result$x_train)[[2]])
+  expect_equal(c('col1', 'col2'), dimnames(result$x_test)[[2]])
+})
