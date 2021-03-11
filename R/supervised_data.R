@@ -1,3 +1,4 @@
+library(tidymodels)
 #' Data Splitting for Supervised Machine Learning
 #'
 #' A function that utilizes `tidymodels`'s `initial_split` function to perform data spltting
@@ -30,4 +31,40 @@
 #' x_test <- cars$xtest
 #' y_test <- cars$ytest
 supervised_data <-  function(data, xcols, ycols, ...) {
+  data_split <- initial_split(data, ...)
+  train_data <- training(data_split)
+  test_data <- testing(data_split)
+  x_train <- train_data %>%
+    select({
+      {
+        xcols
+      }
+    })
+  y_train <- train_data %>%
+    select({
+      {
+        ycols
+      }
+    })
+  x_test <- test_data %>%
+    select({
+      xcols
+    })
+  y_test <- test_data %>%
+    select ({
+      {
+        ycols
+      }
+    })
+  value <-
+    list(
+      "data" = data,
+      "train" = train_data,
+      "test" = test_data,
+      "x_train" = x_train,
+      "y_train" = y_train,
+      "x_test" = x_test,
+      "y_test" = y_test
+    )
+  value
 }
