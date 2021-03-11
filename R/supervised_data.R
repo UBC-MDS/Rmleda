@@ -31,6 +31,20 @@ library(tidymodels)
 #' x_test <- cars$xtest
 #' y_test <- cars$ytest
 supervised_data <-  function(data, xcols, ycols, ...) {
+
+  if (!is.data.frame(data)) {
+    stop("data must be a dataframe")
+  }
+
+  if(!is.character(xcols)) {
+    stop("xcols must be a character vector or list of column names")
+  }
+
+  if(!is.character(ycols)) {
+    stop("ycols must be a character vector or listof column names")
+  }
+
+
   data_split <- initial_split(data, ...)
   train_data <- training(data_split)
   test_data <- testing(data_split)
