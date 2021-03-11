@@ -41,7 +41,7 @@ supervised_data <-  function(data, xcols, ycols, ...) {
   }
 
   if(!is.character(ycols)) {
-    stop("ycols must be a character vector or listof column names")
+    stop("ycols must be a character vector or lis tof column names")
   }
 
 
