@@ -13,6 +13,11 @@ library(naniar)
 #' autoimpute_na(toy_df)
 autoimpute_na <- function(df) {
 
+  # Check the type of dataframe is a dataframe
+  if (!is.data.frame(df)) {
+    stop("The input should be of type 'data.frame' or 'tibble'")
+  }
+
   # Check if there are any missing values entered manually and replace them with the NA value
   df <- df %>%
     replace_with_na_all(condition = ~.x %in% c("na", "n/a", "nan", "N/A", "not available",
