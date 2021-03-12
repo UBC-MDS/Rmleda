@@ -13,9 +13,9 @@ library(naniar)
 #' autoimpute_na(toy_df)
 autoimpute_na <- function(df) {
 
-  # Check the type of dataframe is a dataframe
+  # Check the type of the input is a dataframe
   if (!is.data.frame(df)) {
-    stop("The input should be of type 'data.frame' or 'tibble'")
+    stop("The input should be of type 'data.frame'")
   }
 
   # Check if there are any missing values entered manually and replace them with the NA value
@@ -38,5 +38,5 @@ autoimpute_na <- function(df) {
   }
 
   imputed_df <- df
-  return(imputed_df)
+  return(as.data.frame(imputed_df))
 }
