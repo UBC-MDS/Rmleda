@@ -1,3 +1,6 @@
+library(recipes)
+library(dplyr)
+library(forcats)
 #' Apply standard scaling and centering to the numeric features of a given
 #' input dataframe.
 #'
@@ -11,16 +14,12 @@
 #' @export
 #'
 #' @examples
-#' df_1 <- tibble(x = 1:5,
-#' y = seq(2,10, by = 2),
-#' z = x ^ 2 + y,
-#' target = c(1,1,0,1,0))
+#' df <- tidyr::tibble(x = 1:5,
+#'                       y = seq(2,10, by = 2),
+#'                       z = x ^ 2 + y,
+#'                       target = c(1,1,0,1,0))
 #'
 #' dfscaling(df, target)
-
-library(tidymodels)
-library(tidyverse)
-library(dplyr)
 dfscaling <- function(df, target) {
 
   if (!is.data.frame(df)) {
@@ -34,18 +33,18 @@ dfscaling <- function(df, target) {
 
   #removing zero-variance columns
   df <- df %>%
-    select(- as.numeric(which(apply(df, 2, var) == 0))) %>%
-    mutate(Class = {{target}}) %>%
-    select(-target) %>%
-    mutate(Class = as_factor(Class))
+    dplyr::select(- as.numeric(which(apply(df, 2, stats::var) == 0))) %>%
+    dplyr::mutate(Class = {{target}}) %>%
+    dplyr::select(-target) %>%
+    dplyr::mutate(Class = as.factor(Class))
 
-  df_recipe <- recipe(Class ~ ., data = df)
+  df_recipe <- recipes::recipe(Class ~ ., data = df)
   df_recipe <- df_recipe %>%
-    step_scale(all_numeric()) %>%
-    step_center(all_numeric()) %>%
-    prep()
+    recipes::step_scale(recipes::all_numeric()) %>%
+    recipes::step_center(recipes::all_numeric()) %>%
+    recipes::prep()
 
-  scaled_df <- bake(df_recipe, df)
+  scaled_df <- recipes::bake(df_recipe, df)
   return(scaled_df)
 
 }
