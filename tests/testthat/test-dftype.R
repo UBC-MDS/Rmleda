@@ -24,7 +24,7 @@ test_that("The type of summary should not be data frame",{
 
 # Test the value of output
 test_that("The unique values are incorrect",{
-  expect_equivalent(dftype(df)$unique_df[["unique_values"]][1], 'US,Mexico,CANADA,UK')
+  expect_equal(dftype(df)$unique_df[["unique_values"]][1], 'US,Mexico,CANADA,UK', ignore_attr = TRUE)
 })
 
 
