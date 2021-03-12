@@ -1,8 +1,8 @@
-#' Apply standard scaling and centering to the numeric features of a given input dataframe.
+#' Apply standard scaling and centering to the numeric features of a given
+#' input dataframe.
 #'
-#' The standard score of a sample x is calculated as:
-#' z = (x - u) / s
-#' where u is the mean of the training samples, and s is the standard deviation of the training samples.
+#' Each of the numeric columns will have a mean of 0
+#' and standard deviation of 1 after the transformation.
 #'
 #' @param df Data Frame
 #' @param target name of the target column
@@ -24,7 +24,7 @@ library(dplyr)
 dfscaling <- function(df, target) {
 
   if (!is.data.frame(df)) {
-    stop("inpu data must be a dataframe")
+    stop("input data must be a dataframe")
   }
 
   if (is.null(dim(df))) {
