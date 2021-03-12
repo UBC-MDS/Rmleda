@@ -1,5 +1,3 @@
-library(rsample)
-library(dplyr)
 #' Data Splitting for Supervised Machine Learning
 #'
 #' A function that utilizes `tidymodels`'s `initial_split` function to perform data spltting

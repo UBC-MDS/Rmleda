@@ -1,6 +1,3 @@
-library(recipes)
-library(dplyr)
-library(forcats)
 #' Apply standard scaling and centering to the numeric features of a given
 #' input dataframe.
 #'

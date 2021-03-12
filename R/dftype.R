@@ -1,5 +1,3 @@
-library(dplyr)
-
 #' Explore the type of data frame variables and columns.
 #'
 #' Create a new data frame which contains the type of columns and variables for the input data frame.
