@@ -10,14 +10,21 @@ dftype(df)
 \item{df}{Data Frame}
 }
 \value{
-summary Data Frame
+summary Vector
 
 unique_df Data Frame
 }
 \description{
-Create a new data frame which contians the type of columns and variables for the input data frame.
+Create a new data frame which contains the type of columns and variables for the input data frame.
 Furthermore, if there are non-numeric columns, it will return the unique values of non-numeric columns and their length.
 }
 \examples{
-dftype(df)
+df <- data.frame(type = (c("Air", "Ship", "Bus", "Air")),
+time= c(6, 32, 31, 5),
+origin= c("US", "Mexico", "CANADA", "UK"))
+
+results <- dftype(df)
+results$summary
+results$unique_df
+
 }
