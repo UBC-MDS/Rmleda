@@ -1,3 +1,4 @@
+library(tidyverse)
 #' Explore the type of data frame variables and columns.
 #'
 #' Create a new data frame which contains the type of columns and variables for the input data frame.
@@ -8,6 +9,7 @@
 #' @return summary Vector
 #' @return unique_df Data Frame
 #' @export
+#'
 #' @examples
 #' df <- data.frame(type = (c("Air", "Ship", "Bus", "Air")),
 #' time= c(6, 32, 31, 5),
@@ -17,7 +19,6 @@
 #' results$summary
 #' results$unique_df
 #'
-library(tidyverse)
 dftype <- function(df){
 
   # Check the type of dataframe is a dataframe
