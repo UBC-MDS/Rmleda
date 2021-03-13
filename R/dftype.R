@@ -1,4 +1,3 @@
-library(tidyverse)
 #' Explore the type of data frame variables and columns.
 #'
 #' Create a new data frame which contains the type of columns and variables for the input data frame.
@@ -36,13 +35,13 @@ dftype <- function(df){
                           num_unique_values=integer())
 
   for (val in non_numeric_col){
-    unique_df <- dplyr::add_row(unique_df,
+    unique_df <- tibble::add_row(unique_df,
                                 column_name = val,
                                 unique_values = unique(non_numeric_df[[val]]),
                                 num_unique_values = length(unique(non_numeric_df[[val]]))                                )
   }
 
-  unique_2 <- aggregate(unique_values ~ column_name,
+  unique_2 <- stats::aggregate(unique_values ~ column_name,
                         unique_df,
                         paste,
                         collapse=","
