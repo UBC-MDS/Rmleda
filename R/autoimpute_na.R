@@ -10,7 +10,7 @@ library(naniar)
 #' @return a dataframe or a tibble
 #' @export
 #' @examples
-#' autoimpute_na(toy_df)
+#' autoimpute_na(toy_df_na)
 autoimpute_na <- function(df) {
 
   # Check the type of the input is a dataframe
