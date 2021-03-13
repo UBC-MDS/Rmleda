@@ -16,5 +16,8 @@ a dataframe or a tibble
 Identify and impute missing values in a dataframe and return a new dataframe with imputed missing values.
 }
 \examples{
-
+toy_df_na <- data.frame(chocolate_brand = (c("Lindt", "Rakhat", "Lindt",
+                                             "Richart", "not available")),
+                        price = c(3, NA, 4, 6, 3))
+autoimpute_na(toy_df_na)
 }

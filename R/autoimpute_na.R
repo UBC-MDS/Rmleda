@@ -7,6 +7,9 @@
 #' @return a dataframe or a tibble
 #' @export
 #' @examples
+#' toy_df_na <- data.frame(chocolate_brand = (c("Lindt", "Rakhat", "Lindt",
+#'                                              "Richart", "not available")),
+#'                         price = c(3, NA, 4, 6, 3))
 #' autoimpute_na(toy_df_na)
 autoimpute_na <- function(df) {
 
