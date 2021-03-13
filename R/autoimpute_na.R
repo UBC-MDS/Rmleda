@@ -7,7 +7,10 @@
 #' @return a dataframe or a tibble
 #' @export
 #' @examples
-#'
+#' toy_df_na <- data.frame(chocolate_brand = (c("Lindt", "Rakhat", "Lindt",
+#'                                              "Richart", "not available")),
+#'                         price = c(3, NA, 4, 6, 3))
+#' autoimpute_na(toy_df_na)
 autoimpute_na <- function(df) {
 
   # Check the type of the input is a dataframe
@@ -18,7 +21,7 @@ autoimpute_na <- function(df) {
   # Check if there are any missing values entered manually and replace them with the NA value
   df <- df %>%
     naniar::replace_with_na_all(condition = ~.x %in% c("na", "n/a", "nan", "N/A", "not available",
-                                               "Not available", "Not Available", "-", "--", "---"))
+                                                       "Not available", "Not Available", "-", "--", "---"))
 
   # If there are no missing values, then return the original df
   if (sum(is.na(df)) == 0){
