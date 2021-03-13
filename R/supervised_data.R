@@ -1,4 +1,3 @@
-library(tidymodels)
 #' Data Splitting for Supervised Machine Learning
 #'
 #' A function that utilizes `tidymodels`'s `initial_split` function to perform data spltting
@@ -20,6 +19,7 @@ library(tidymodels)
 #'     \item ytest - The test portion of the dataset containing `y` targets only.
 #' }
 #' @export
+#' @importFrom magrittr "%>%"
 #'
 #' @examples
 #' set.seed(1353)
@@ -45,27 +45,27 @@ supervised_data <-  function(data, xcols, ycols, ...) {
   }
 
 
-  data_split <- initial_split(data, ...)
-  train_data <- training(data_split)
-  test_data <- testing(data_split)
+  data_split <- rsample::initial_split(data, ...)
+  train_data <- rsample::training(data_split)
+  test_data <- rsample::testing(data_split)
   x_train <- train_data %>%
-    select({
+    dplyr::select({
       {
         xcols
       }
     })
   y_train <- train_data %>%
-    select({
+    dplyr::select({
       {
         ycols
       }
     })
   x_test <- test_data %>%
-    select({
+    dplyr::select({
       xcols
     })
   y_test <- test_data %>%
-    select ({
+    dplyr::select ({
       {
         ycols
       }

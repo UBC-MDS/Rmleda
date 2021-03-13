@@ -1,6 +1,3 @@
-library(dplyr)
-library(naniar)
-
 #' Identify and impute missing values in a dataframe.
 #'
 #' Identify and impute missing values in a dataframe and return a new dataframe with imputed missing values.
@@ -10,7 +7,7 @@ library(naniar)
 #' @return a dataframe or a tibble
 #' @export
 #' @examples
-#' autoimpute_na(toy_df_na)
+#'
 autoimpute_na <- function(df) {
 
   # Check the type of the input is a dataframe
@@ -20,8 +17,8 @@ autoimpute_na <- function(df) {
 
   # Check if there are any missing values entered manually and replace them with the NA value
   df <- df %>%
-    replace_with_na_all(condition = ~.x %in% c("na", "n/a", "nan", "N/A", "not available",
-                                               "Not available", "Not Available", "-", "--", "---"))
+    naniar::replace_with_na_all(condition = ~.x %in% c("na", "n/a", "nan", "N/A", "not available",
+                                                       "Not available", "Not Available", "-", "--", "---"))
 
   # If there are no missing values, then return the original df
   if (sum(is.na(df)) == 0){

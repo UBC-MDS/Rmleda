@@ -16,5 +16,5 @@ a dataframe or a tibble
 Identify and impute missing values in a dataframe and return a new dataframe with imputed missing values.
 }
 \examples{
-autoimpute_na(toy_df)
+
 }
