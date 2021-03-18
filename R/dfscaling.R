@@ -27,6 +27,10 @@ dfscaling <- function(df, target) {
     stop("dataframe must contain data")
   }
 
+  # Setting the Class variable to NULL
+  # This is to address dplyr's evaluation when performing devtools::check()
+  # we get a Note without this assignment
+  Class <- NULL
 
   #removing zero-variance columns
   df <- df %>%
@@ -40,6 +44,7 @@ dfscaling <- function(df, target) {
     recipes::step_scale(recipes::all_numeric()) %>%
     recipes::step_center(recipes::all_numeric()) %>%
     recipes::prep()
+
 
   scaled_df <- recipes::bake(df_recipe, df)
   return(scaled_df)
