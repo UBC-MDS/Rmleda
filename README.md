@@ -16,9 +16,9 @@ provide value in other project types as well.
 
 The `Rmleda` package will include the following classes/functions:
 
--   `SupervisedData` is a wrapper class that splits a dataframe into
-    train and test sets and further into X and y subsets based on a list
-    of user-provided columns.
+-   `SupervisedData` is a function that splits a Data Frame into train
+    and test sets and further into X and y subsets based on a list of
+    user-provided columns.
 
 -   `dftype()` function will return the type of columns and variables
     for the input data frame. Furthermore, if there are non-numeric
@@ -64,22 +64,49 @@ subsequent steps of the machine learning pipeline.
 
 ## Installation
 
-You can install the released version of Rmleda from
+If you do not have the `devtools` package, you can install it via
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("Rmleda")
+install.packages("devtools")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+Then, install Rmleda from GitHub as follows:
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("UBC-MDS/Rmleda")
+```
+
+Lastly, load the package:
+
+``` r
+library(Rmleda)
 ```
 
 ## Example
 
+-   Check the datatypes and a summary of your input dataframe
+
+``` r
+dftype(df)
 ```
-// TODO
+
+-   Impute NAs in your input dataframe
+
+``` r
+autoimpute_na(df)
+```
+
+-   Apply centering and scaling to the numeric features in your input
+    dataframe
+
+``` r
+dfscaling(df, target)
+```
+
+-   Split the data into X train, y train, X test, and y test subsets in
+    one convenient class call using `SupervisedData`
+
+``` r
+SupervisedData(df, x_cols = c('feature1', 'feature2'), y_cols = c('target'))
 ```

@@ -39,24 +39,43 @@ In supervised machine learning, data splitting is often a multi-step process tha
 
 ## Installation
 
-You can install the released version of Rmleda from [CRAN](https://CRAN.R-project.org) with:
+If you do not have the `devtools` package, you can install it via [CRAN](https://CRAN.R-project.org) with:
 
-``` r
-install.packages("Rmleda")
+```{r devtools, eval=FALSE, echo=TRUE}
+install.packages("devtools")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+Then, install Rmleda from GitHub as follows:
 
-``` r
-# install.packages("devtools")
+```{r installation, echo=TRUE, message=FALSE, results='hide'}
 devtools::install_github("UBC-MDS/Rmleda")
 ```
 
-## Example
+Lastly, load the package:
 
-This is a basic example which shows you how to solve a common problem:
+```{r setup}
+library(Rmleda)
+```
 
-```{r example}
-#library(Rmleda)
-## basic example code
+
+## Examples
+
+- Check the datatypes and a summary of your input dataframe:
+```{r}
+dftype(df)
+```
+
+- Impute NAs in your input dataframe:
+```{r}
+autoimpute_na(df)
+```
+
+- Apply centering and scaling to the numeric features in your input dataframe:
+```{r}
+dfscaling(df, target)
+```
+
+- Split the data into X train, y train, X test, and y test subsets in one convenient class call using `SupervisedData`:
+```{r}
+SupervisedData(df, x_cols = c('feature1', 'feature2'), y_cols = c('target'))
 ```
