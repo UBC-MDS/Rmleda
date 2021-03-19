@@ -46,7 +46,7 @@ toy_df <- data.frame(
   chocolate_brand = c('Lindt', 'Rakhat', 'Lindt', 'Richart', 'Not Available'),
   price = c(3, NA, 4, 6, 3),
   type = c("dark", "dark", "white", "white", "dark")
-)1
+)
 ```
 
 ### Data type exploration
