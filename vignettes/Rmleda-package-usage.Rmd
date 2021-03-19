@@ -2,7 +2,7 @@
 title: "Rmleda: Package Usage"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Rmleda-package-usage}
+  %\VignetteIndexEntry{Rmleda: Package Usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -50,26 +50,55 @@ toy_df <- data.frame(
 ```
 
 ### Data type exploration
-The `dftype()` function will return the type of columns and variables for the input data frame. Furthermore, if there are non-numeric columns, it will return the unique values of non-numeric columns and their length.
+As a first step, you can use the `dftype()` function to take a look at data type information, summary statistics (for numeric columns), and unique values (for non-numeric columns).
+
+The function returns a list of results. The first entity (`summary`) is a summary of each column. The second entity (`unique_df`) is a data frame that contains unique values for each non-numeric column name and its frequency.
 
 ```{r dftype}
 dftype(toy_df)
 ```
 
-The function returns a list of results. The first entity (`$summary`) is a summary of each column. the second entity(`$unique_df`) is a data frame that contains a non-numeric column name, unique values of each column, and its count.
+We can access `summary` separately
 
-We can access both summary and unique_df separately.
-
-```{r dftype_result}
+```{r summary_result}
 dftype(toy_df)$summary
+```
+And likewise `unique_df` 
+
+```{r unique_df_result}
 dftype(toy_df)$unique_df
 ```
+### Identifying and imputing missing values
+
+Our toy dataset seemingly contains missing values in `chocolate_brand` and `price` columns.
+
+To impute missing values in the `toy_df` we can make use of `autoimpute_na()`. This function identifies and imputes missing values in a given dataframe based on the types of the columns, i.e. the function fills missing values with the mean for numeric columns and the most frequent value for non-numeric columns. 
+
+```{r}
+toy_df
+
+(toy_df <- autoimpute_na(toy_df))
+```
+As you can see from the above results, the `autoimpute_na()` function detects some common non-standard missing values manually entered by users (e.g., “not available”, “n/a”, “na”, “-”) while identifying and imputing missing data. The output of the `autoimpute_na()` function will be a dataframe with imputed values.
+
+
+### Scaling and centering numeric columns
+
+Scaling numeric features is an important and frequently applied step in a supervised machine learning workflow. `dfscaling()` can automatically identify and scale all numeric features in the dataset. 
+
+The function takes two arguments: the input dataframe and the name of the target or label column for the supervised machine learning task. In the toy_df dataset `type` is the target column
+
+```{r}
+dfscaling(toy_df, type)
+```
+
+As seen above, the function applies standard scaling and centering. Each of the numeric columns will have a mean of 0 and standard deviation of 1 after the transformation. All columns with zero-variance are excluded prior to applying this transformation.
 
 ### Data splitting
 
 After performing the above pre-processing tasks, we are ready to move on perform data splitting. Instead of manually creating variables to hold train_set, test_set, x_train, y_train, x_test and y_test, we can simply use the `supervised_data` function. We pass it `toy_df` along with the names of `x` features or columns and the name of the `y` target column as below. 
 
-<!-- The function automatically calls [initial_split()]("https://rsample.tidymodels.org/reference/initial_split.html") from the `tidymodels` package with the default arguments and returns easy-access variables for train portion of the dataset (`train`), the test portion of the dataset (`test`), the train portion of the dataset containing `X` features only (`x_train`), the train portion of the dataset containing `y` targets only (`y_train`), the test portion of the dataset containing `X` features only (`x_test`), and the test portion of the dataset containing `y` targets only (`y_test`). You can also access the original dataset from the supervised_data object using the variable name `data`. -->
+The function automatically calls [initial_split()]("https://rsample.tidymodels.org/reference/initial_split.html") from the `tidymodels` package with the default arguments and returns easy-access variables for train portion of the dataset (`train`), the test portion of the dataset (`test`), the train portion of the dataset containing `X` features only (`x_train`), the train portion of the dataset containing `y` targets only (`y_train`), the test portion of the dataset containing `X` features only (`x_test`), and the test portion of the dataset containing `y` targets only (`y_test`). You can also access the original dataset from the supervised_data object using the variable name `data`.
 
 ```{r function_usage}
 super_data <-
@@ -122,31 +151,4 @@ And access the subsets in the same manner described previously
 # be rounded down as per initial_model() implementation from tidymodels
 super_data$train
 super_data$test
-```
-
-### Identifying and imputing missing values
-
-The `autoimpute_na()` function identifies and imputes missing values in a given dataframe based on the types of the columns, i.e. the function fills missing values with the mean for numeric columns and the most frequent value for non-numeric columns. Additionally, the `autoimpute_na()` function detects some common non-standard missing values manually entered by users (e.g., “not available”, “n/a”, “na”, “-”) while identifying and imputing missing data. The output of the `autoimpute_na()` function will be a dataframe with imputed values.
-
-For example, in the toy dataset below we are imputing the missing values in `chocolate_brand` and `price` columns where the missing value in the first column is entered manually as `Not Available` and that in the second one is the `NA` value.
-
-```{r}
-toy_df_na <- toy_df
-toy_df_na
-```
-
-The `autoimpute_na()` function's output is given below. Now, `Not Available` is replaced with `Lindt` which is the most frequent value in the `chocolate_brand` column, while `NA` becomes `4` which is the mean of the `price` column values.
-
-```{r}
-autoimpute_na(toy_df_na)
-```
-
-### Scaling and centering numeric columns
-
-The dfscaling function applies standard scaling and centering to the numeric features of a given input dataframe. Each of the numeric columns will have a mean of 0 and standard deviation of 1 after the transformation. All columns with zero-variance are excluded prior to applying this transformation.
-
-The function takes two arguments, the input dataframe and the name of the target column (type in the below example).
-
-```{r}
-dfscaling(toy_df, type)
 ```
