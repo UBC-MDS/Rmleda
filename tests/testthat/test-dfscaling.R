@@ -8,7 +8,7 @@ df_1 <- tidyr::tibble(
 df_result <- tidyr::tibble(
   x = c(-0.866, -0.866, 0.866, 0.866),
   y = c(-0.866, -0.866, 0.866, 0.866),
-  Class = as.factor(c(1,1,0,1))
+  target = as.factor(c(1,1,0,1))
 )
 
 df_empty <- tidyr::tibble()

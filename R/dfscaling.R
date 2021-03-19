@@ -10,6 +10,9 @@
 #' @return scaled_df Data Frame
 #' @export
 #'
+#'
+#' @importFrom rlang :=
+#'
 #' @examples
 #' df <- tidyr::tibble(x = 1:5,
 #'                       y = seq(2,10, by = 2),
@@ -27,19 +30,15 @@ dfscaling <- function(df, target) {
     stop("dataframe must contain data")
   }
 
-  # Setting the Class variable to NULL
-  # This is to address dplyr's evaluation when performing devtools::check()
-  # we get a Note without this assignment
-  Class <- NULL
 
   #removing zero-variance columns
   df <- df %>%
-    dplyr::select(- as.numeric(which(apply(df, 2, stats::var) == 0))) %>%
-    dplyr::mutate(Class = {{target}}) %>%
-    dplyr::select(-target) %>%
-    dplyr::mutate(Class = as.factor(Class))
+    dplyr::select(-as.numeric(which(apply(df, 2, stats::var) == 0))) %>%
+    dplyr::mutate({{target}} := as.factor({{target}}))
 
-  df_recipe <- recipes::recipe(Class ~ ., data = df)
+
+  form <- rlang::new_formula(rlang::ensym(target), rlang::sym("."))
+  df_recipe <- recipes::recipe(form, data = df)
   df_recipe <- df_recipe %>%
     recipes::step_scale(recipes::all_numeric()) %>%
     recipes::step_center(recipes::all_numeric()) %>%
