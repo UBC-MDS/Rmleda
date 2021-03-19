@@ -113,3 +113,12 @@ super_data$test
 ```
 
 
+### Scaling and centering numeric columns
+
+The dfscaling function applies standard scaling and centering to the numeric features of a given input dataframe. Each of the numeric columns will have a mean of 0 and standard deviation of 1 after the transformation. All columns with zero-variance are excluded prior to applying this transformation.
+
+The function takes two arguments, the input dataframe and the name of the target column (type in the below example).
+
+```{r}
+dfscaling(df, type)
+```
