@@ -23,7 +23,7 @@ dfscaling <- function(df, target) {
     stop("input data must be a dataframe")
   }
 
-  if (is.null(dim(df))) {
+  if ((nrow(df) == 0)) {
     stop("dataframe must contain data")
   }
 
