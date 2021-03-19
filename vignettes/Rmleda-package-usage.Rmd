@@ -26,7 +26,7 @@ If you do not have the `devtools` package you can install it via cran
 install.packages("devtools")
 ```
 
-Then install Rmleda from GitHib as follows
+Then install Rmleda from GitHub as follows
 
 ```{r installation, echo=TRUE, message=FALSE, results='hide'}
 devtools::install_github("UBC-MDS/Rmleda")
