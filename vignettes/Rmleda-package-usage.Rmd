@@ -1,5 +1,5 @@
 ---
-title: "Rmleda-package-usage"
+title: "Rmleda: Package Usage"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Rmleda-package-usage}
@@ -14,13 +14,25 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Rmleda
+## Overview
 
 This vignette describes the use of the SupervisedData(), dftype(), autoimpute_na(), and dfscaling() functions included in package Rmleda. The Rmleda package helps with preliminary EDA for a given dataset to perform various data preparation and wrangling tasks such as data splitting, exploration, imputation, and scaling. These functionalities were identified as commonly-performed tasks in supervised machine learning settings but may provide value in other project types as well.
 
-To explore the functions of Rmleda, we will use the following fictional dataset on chocolates! The
+First we install the package via github
 
-```{r}
+```{r installation, echo = TRUE, message= FALSE}
+install.packages("devtools")
+devtools::install_github("UBC-MDS/Rmleda")
+```
+Then we load the package
+
+```{r setup}
+library(Rmleda)
+```
+
+To explore the functionality of Rmleda, we will use the following fictional dataset on chocolates! The
+
+```{r dataset}
 toy_df <- data.frame(
   chocolate_brand = c('Lindt', 'Rakhat', 'Lindt', 'Richart', 'Not Available'),
   price = c(3, NA, 4, 6, 3),
@@ -29,17 +41,13 @@ toy_df <- data.frame(
 )
 ```
 
-First we load the package
-
-```{r setup}
-# library(Rmleda)
-```
+***INSERT OTHER SECTIONS HERE***
 
 After performing the above pre-processing tasks, we are ready to move on perform data splitting. Instead of manually creating variables to hold train_set, test_set, x_train, y_train, x_test and y_test, we can simply use the `supervised_data` function. We pass it `toy_df` along with the names of `x` features or columns and the name of the `y` target column as below. 
 
 The function automatically calls `initial_split()` from the `tidymodels` package with the default arguments and returns easy-access variables for train portion of the dataset (`train`), the test portion of the dataset (`test`), the train portion of the dataset containing `X` features only (`x_train`), the train portion of the dataset containing `y` targets only (`y_train`), the test portion of the dataset containing `X` features only (`x_test`), and the test portion of the dataset containing `y` targets only (`y_test`). You can also access the original dataset from the supervised_data object using the variable name `data`.
 
-```{r}
+```{r function_usage}
 super_data <-
   supervised_data(toy_df,
                   xcols = c('chocolate_brand', 'type'),
@@ -48,19 +56,19 @@ super_data <-
 
 For example, we can quickly access the x_train portion
 
-```{r}
+```{r train_subset}
 super_data$train
 ```
 
 and with just the x columns/feature
 
-```{r}
+```{r x_train_subset}
 super_data$x_train
 ```
 
 Similarly we can access the other subsets of the data:
 
-```{r echo=FALSE}
+```{r other_subsets, eval = FALSE}
 super_data$data      # train portion of the dataset
 super_data$train     # test portion of the dataset
 super_data$test      # test portion of the dataset
@@ -72,17 +80,17 @@ super_data$y_test    # test portion of the dataset containing `y` targets only
 
 Finally, we can customize the split by passing extra arguments to `supervised_data`. These will be passed to `initial_split()` from the `tidymodels` package. See the documentation for more information.
 
-```{r}
+```{r, additional_args}
 super_data <-
   supervised_data(
     toy_df,
     xcols = c('chocolate_brand', 'type'),
     ycol = c('price'),
-    prop = 1 / 2
-  ) # Change split ratio to 0.5
+    prop = 1 / 2 # Change split ratio to 0.5
+  ) 
 ```
 
-```{r}
+```{r custom_split_output}
 # Note for datasets with sizes that result in non-integer splits, 
 # the training portion size will be rounded up and the test portion size will
 # be rounded down as per initial_model() implementation from tidymodels

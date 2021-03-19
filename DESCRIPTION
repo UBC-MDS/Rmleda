@@ -40,5 +40,6 @@ Imports:
     stats,
     tibble,
     magrittr,
-    rlang
+    rlang,
+    Rmleda
 VignetteBuilder: knitr
