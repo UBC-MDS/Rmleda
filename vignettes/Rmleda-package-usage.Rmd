@@ -113,3 +113,19 @@ super_data$test
 ```
 
 
+### Identifying and imputing missing values
+
+The `autoimpute_na()` function identifies and imputes missing values in a given dataframe based on the types of the columns, i.e. the function fills missing values with the mean for numeric columns and the most frequent value for non-numeric columns. Additionally, the `autoimpute_na()` function detects some common non-standard missing values manually entered by users (e.g., “not available”, “n/a”, “na”, “-”) while identifying and imputing missing data. The output of the autoimpute_na() function will be a dataframe with imputed values.
+
+For example, in the toy dataset below we are imputing the missing values in `chocolate_brand` and `price` columns where the missing value in the first column is entered manually as `not available` and that in the second one is the `NA` value.
+
+```{r}
+toy_df_na <- toy_df
+toy_df_na
+```
+
+The `autoimpute_na()` function's output is given below. Now, the `Not Available` is replaced with `Lindt` which is the most frequent value in the `chocolate_brand` column, while `NA` becomes `4` which is the mean of the `price` column values.
+
+```{r}
+autoimpute_na(toy_df_na)
+```
