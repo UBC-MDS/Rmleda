@@ -47,35 +47,35 @@ install.packages("devtools")
 
 Then, install Rmleda from GitHub as follows:
 
-```{r installation, echo=TRUE, message=FALSE, results='hide'}
+```{r installation, echo=TRUE, message=FALSE, results='hide', eval = FALSE}
 devtools::install_github("UBC-MDS/Rmleda")
 ```
 
 Lastly, load the package:
 
-```{r setup}
+```{r setup, eval = FALSE}
 library(Rmleda)
 ```
 
 
-## Examples
+## Example
 
 - Check the datatypes and a summary of your input dataframe:
-```{r}
-dftype(df)
+```{r eval = FALSE}
+Rmleda::dftype(df)
 ```
 
 - Impute NAs in your input dataframe:
-```{r}
-autoimpute_na(df)
+```{r eval = FALSE}
+Rmleda::autoimpute_na(df)
 ```
 
 - Apply centering and scaling to the numeric features in your input dataframe:
-```{r}
-dfscaling(df, target)
+```{r eval = FALSE}
+Rmleda::dfscaling(df, target)
 ```
 
 - Split the data into X train, y train, X test, and y test subsets in one convenient class call using `SupervisedData`:
-```{r}
-SupervisedData(df, x_cols = c('feature1', 'feature2'), y_cols = c('target'))
+```{r eval = FALSE}
+super_data <- Rmleda::supervised_data(df, xcols = c('feature1', 'feature2'),ycol = c('target'))
 ```

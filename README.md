@@ -85,28 +85,28 @@ library(Rmleda)
 
 ## Example
 
--   Check the datatypes and a summary of your input dataframe
+-   Check the datatypes and a summary of your input dataframe:
 
 ``` r
-dftype(df)
+Rmleda::dftype(df)
 ```
 
--   Impute NAs in your input dataframe
+-   Impute NAs in your input dataframe:
 
 ``` r
-autoimpute_na(df)
+Rmleda::autoimpute_na(df)
 ```
 
 -   Apply centering and scaling to the numeric features in your input
-    dataframe
+    dataframe:
 
 ``` r
-dfscaling(df, target)
+Rmleda::dfscaling(df, target)
 ```
 
 -   Split the data into X train, y train, X test, and y test subsets in
-    one convenient class call using `SupervisedData`
+    one convenient class call using `SupervisedData`:
 
 ``` r
-SupervisedData(df, x_cols = c('feature1', 'feature2'), y_cols = c('target'))
+super_data <- Rmleda::supervised_data(df, xcols = c('feature1', 'feature2'),ycol = c('target'))
 ```
