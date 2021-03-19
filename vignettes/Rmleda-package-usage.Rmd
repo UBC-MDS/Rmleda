@@ -120,5 +120,5 @@ The dfscaling function applies standard scaling and centering to the numeric fea
 The function takes two arguments, the input dataframe and the name of the target column (type in the below example).
 
 ```{r}
-dfscaling(df, type)
+dfscaling(toy_df, type)
 ```
