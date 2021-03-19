@@ -112,7 +112,6 @@ super_data$train
 super_data$test
 ```
 
-
 ### Identifying and imputing missing values
 
 The `autoimpute_na()` function identifies and imputes missing values in a given dataframe based on the types of the columns, i.e. the function fills missing values with the mean for numeric columns and the most frequent value for non-numeric columns. Additionally, the `autoimpute_na()` function detects some common non-standard missing values manually entered by users (e.g., “not available”, “n/a”, “na”, “-”) while identifying and imputing missing data. The output of the `autoimpute_na()` function will be a dataframe with imputed values.
@@ -128,4 +127,14 @@ The `autoimpute_na()` function's output is given below. Now, `Not Available` is 
 
 ```{r}
 autoimpute_na(toy_df_na)
+```
+
+### Scaling and centering numeric columns
+
+The dfscaling function applies standard scaling and centering to the numeric features of a given input dataframe. Each of the numeric columns will have a mean of 0 and standard deviation of 1 after the transformation. All columns with zero-variance are excluded prior to applying this transformation.
+
+The function takes two arguments, the input dataframe and the name of the target column (type in the below example).
+
+```{r}
+dfscaling(toy_df, type)
 ```
