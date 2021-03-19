@@ -20,13 +20,18 @@ This vignette describes the use of the `supervised_data()`, `dftype()`, `autoimp
 
 ### Installation
 
-First we install the package via GitHub
+If you do not have the `devtools` package you can install it via cran
+
+```{r devtools, eval=FALSE, echo=TRUE}
+install.packages("devtools")
+```
+
+Then install Rmleda from GitHib as follows
 
 ```{r installation, echo=TRUE, message=FALSE, results='hide'}
-install.packages("devtools")
 devtools::install_github("UBC-MDS/Rmleda")
 ```
-Then we load the package
+Lastly, load the package
 
 ```{r setup}
 library(Rmleda)
@@ -34,7 +39,7 @@ library(Rmleda)
 
 ### Dataset
 
-To explore the functionality of Rmleda, we will use the following fictional dataset on chocolates! The
+To explore the functionality of Rmleda, we will use the following fictional dataset on chocolates!
 
 ```{r dataset}
 toy_df <- data.frame(
