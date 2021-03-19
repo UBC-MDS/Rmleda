@@ -77,5 +77,5 @@ Rmleda::dfscaling(df, target)
 
 - Split the data into X train, y train, X test, and y test subsets in one convenient class call using `SupervisedData`:
 ```{r eval = FALSE}
-Rmleda::SupervisedData(df, x_cols = c('feature1', 'feature2'), y_cols = c('target'))
+super_data <- Rmleda::supervised_data(df, xcols = c('feature1', 'feature2'),ycol = c('target'))
 ```

@@ -108,5 +108,5 @@ Rmleda::dfscaling(df, target)
     one convenient class call using `SupervisedData`:
 
 ``` r
-Rmleda::SupervisedData(df, x_cols = c('feature1', 'feature2'), y_cols = c('target'))
+super_data <- Rmleda::supervised_data(df, xcols = c('feature1', 'feature2'),ycol = c('target'))
 ```
