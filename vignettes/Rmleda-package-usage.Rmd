@@ -45,13 +45,24 @@ To explore the functionality of Rmleda, we will use the following fictional data
 toy_df <- data.frame(
   chocolate_brand = c('Lindt', 'Rakhat', 'Lindt', 'Richart', 'Not Available'),
   price = c(3, NA, 4, 6, 3),
-  type = c('milk', 'dark', 'white', 'milk', 'dark'
-  )
-)
+  type = c("dark", "dark", "white", "white", "dark")
+)1
 ```
 
-### INSERT OTHER SECTIONS HERE
+### Data type exploration
+The `dftype()` function will return the type of columns and variables for the input data frame. Furthermore, if there are non-numeric columns, it will return the unique values of non-numeric columns and their length.
 
+```{r dftype}
+dftype(toy_df)
+```
+
+The function returns a list of results. The first entity (`$summary`) is a summary of each column. the second entity(`$unique_df`) is a data frame that contains a non-numeric column name, unique values of each column, and its count.
+
+We can access both summary and unique_df separately.
+```{r dftype_result}
+dftype(toy_df)$summary
+dftype(toy_df)$unique_df
+```
 
 ### Data splitting
 
