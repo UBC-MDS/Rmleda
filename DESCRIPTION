@@ -41,5 +41,6 @@ Imports:
     tibble,
     magrittr,
     rlang,
-    Rmleda
+    Rmleda,
+    pkgdown
 VignetteBuilder: knitr
