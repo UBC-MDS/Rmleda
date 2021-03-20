@@ -89,58 +89,137 @@
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
-<p>First we install the package via GitHub</p>
+<p>If you do not have the <code>devtools</code> package you can install it via cran</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"UBC-MDS/Rmleda"</span><span class="op">)</span></code></pre></div>
-<p>Then we load the package</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></code></pre></div>
+<p>Then install Rmleda from GitHub as follows</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"UBC-MDS/Rmleda"</span><span class="op">)</span></code></pre></div>
+<p>Lastly, load the package</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">Rmleda</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="dataset" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dataset" class="anchor"></a>Dataset</h3>
-<p>To explore the functionality of Rmleda, we will use the following fictional dataset on chocolates! The</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>To explore the functionality of Rmleda, we will use the following fictional dataset on chocolates!</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">toy_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
   chocolate_brand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Lindt'</span>, <span class="st">'Rakhat'</span>, <span class="st">'Lindt'</span>, <span class="st">'Richart'</span>, <span class="st">'Not Available'</span><span class="op">)</span>,
   price <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="cn">NA</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">3</span><span class="op">)</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'milk'</span>, <span class="st">'dark'</span>, <span class="st">'white'</span>, <span class="st">'milk'</span>, <span class="st">'dark'</span>
-  <span class="op">)</span>
+  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dark"</span>, <span class="st">"dark"</span>, <span class="st">"white"</span>, <span class="st">"white"</span>, <span class="st">"dark"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div id="insert-other-sections-here" class="section level3">
+<div id="data-type-exploration" class="section level3">
 <h3 class="hasAnchor">
-<a href="#insert-other-sections-here" class="anchor"></a>INSERT OTHER SECTIONS HERE</h3>
+<a href="#data-type-exploration" class="anchor"></a>Data type exploration</h3>
+<p>As a first step, you can use the <code><a href="../reference/dftype.html">dftype()</a></code> function to take a look at data type information, summary statistics (for numeric columns), and unique values (for non-numeric columns).</p>
+<p>The function returns a list of results. The first entity (<code>summary</code>) is a summary of each column. The second entity (<code>unique_df</code>) is a data frame that contains unique values for each non-numeric column name and its frequency.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dftype.html">dftype</a></span><span class="op">(</span><span class="va">toy_df</span><span class="op">)</span>
+<span class="co">#&gt; $summary</span>
+<span class="co">#&gt;  chocolate_brand        price         type          </span>
+<span class="co">#&gt;  Length:5           Min.   :3.0   Length:5          </span>
+<span class="co">#&gt;  Class :character   1st Qu.:3.0   Class :character  </span>
+<span class="co">#&gt;  Mode  :character   Median :3.5   Mode  :character  </span>
+<span class="co">#&gt;                     Mean   :4.0                     </span>
+<span class="co">#&gt;                     3rd Qu.:4.5                     </span>
+<span class="co">#&gt;                     Max.   :6.0                     </span>
+<span class="co">#&gt;                     NA's   :1                       </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $unique_df</span>
+<span class="co">#&gt;       column_name                      unique_values num_unique_values</span>
+<span class="co">#&gt; 1 chocolate_brand Lindt,Rakhat,Richart,Not Available                 4</span>
+<span class="co">#&gt; 2            type                         dark,white                 2</span></code></pre></div>
+<p>We can access <code>summary</code> separately</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dftype.html">dftype</a></span><span class="op">(</span><span class="va">toy_df</span><span class="op">)</span><span class="op">$</span><span class="va">summary</span>
+<span class="co">#&gt;  chocolate_brand        price         type          </span>
+<span class="co">#&gt;  Length:5           Min.   :3.0   Length:5          </span>
+<span class="co">#&gt;  Class :character   1st Qu.:3.0   Class :character  </span>
+<span class="co">#&gt;  Mode  :character   Median :3.5   Mode  :character  </span>
+<span class="co">#&gt;                     Mean   :4.0                     </span>
+<span class="co">#&gt;                     3rd Qu.:4.5                     </span>
+<span class="co">#&gt;                     Max.   :6.0                     </span>
+<span class="co">#&gt;                     NA's   :1</span></code></pre></div>
+<p>And likewise <code>unique_df</code></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dftype.html">dftype</a></span><span class="op">(</span><span class="va">toy_df</span><span class="op">)</span><span class="op">$</span><span class="va">unique_df</span>
+<span class="co">#&gt;       column_name                      unique_values num_unique_values</span>
+<span class="co">#&gt; 1 chocolate_brand Lindt,Rakhat,Richart,Not Available                 4</span>
+<span class="co">#&gt; 2            type                         dark,white                 2</span></code></pre></div>
+</div>
+<div id="identifying-and-imputing-missing-values" class="section level3">
+<h3 class="hasAnchor">
+<a href="#identifying-and-imputing-missing-values" class="anchor"></a>Identifying and imputing missing values</h3>
+<p>Our toy dataset seemingly contains missing values in <code>chocolate_brand</code> and <code>price</code> columns.</p>
+<p>To impute missing values in the <code>toy_df</code> we can make use of <code><a href="../reference/autoimpute_na.html">autoimpute_na()</a></code>. This function identifies and imputes missing values in a given dataframe based on the types of the columns, i.e. the function fills missing values with the mean for numeric columns and the most frequent value for non-numeric columns.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">toy_df</span>
+<span class="co">#&gt;   chocolate_brand price  type</span>
+<span class="co">#&gt; 1           Lindt     3  dark</span>
+<span class="co">#&gt; 2          Rakhat    NA  dark</span>
+<span class="co">#&gt; 3           Lindt     4 white</span>
+<span class="co">#&gt; 4         Richart     6 white</span>
+<span class="co">#&gt; 5   Not Available     3  dark</span>
+
+<span class="op">(</span><span class="va">toy_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/autoimpute_na.html">autoimpute_na</a></span><span class="op">(</span><span class="va">toy_df</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;   chocolate_brand price  type</span>
+<span class="co">#&gt; 1           Lindt     3  dark</span>
+<span class="co">#&gt; 2          Rakhat     4  dark</span>
+<span class="co">#&gt; 3           Lindt     4 white</span>
+<span class="co">#&gt; 4         Richart     6 white</span>
+<span class="co">#&gt; 5           Lindt     3  dark</span></code></pre></div>
+<p>As you can see from the above results, the <code><a href="../reference/autoimpute_na.html">autoimpute_na()</a></code> function detects some common non-standard missing values manually entered by users (e.g., “not available”, “n/a”, “na”, “-”) while identifying and imputing missing data. The output of the <code><a href="../reference/autoimpute_na.html">autoimpute_na()</a></code> function will be a dataframe with imputed values.</p>
+</div>
+<div id="scaling-and-centering-numeric-columns" class="section level3">
+<h3 class="hasAnchor">
+<a href="#scaling-and-centering-numeric-columns" class="anchor"></a>Scaling and centering numeric columns</h3>
+<p>Scaling numeric features is an important and frequently applied step in a supervised machine learning workflow. <code><a href="../reference/dfscaling.html">dfscaling()</a></code> can automatically identify and scale all numeric features in the dataset.</p>
+<p>The function takes two arguments: the input dataframe and the name of the target or label column for the supervised machine learning task. In the toy_df dataset <code>type</code> is the target column</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dfscaling.html">dfscaling</a></span><span class="op">(</span><span class="va">toy_df</span>, <span class="va">type</span><span class="op">)</span>
+<span class="co">#&gt; Warning in FUN(newX[, i], ...): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in FUN(newX[, i], ...): NAs introduced by coercion</span>
+<span class="co">#&gt; # A tibble: 5 x 3</span>
+<span class="co">#&gt;   chocolate_brand  price type </span>
+<span class="co">#&gt;   &lt;fct&gt;            &lt;dbl&gt; &lt;fct&gt;</span>
+<span class="co">#&gt; 1 Lindt           -0.816 dark </span>
+<span class="co">#&gt; 2 Rakhat           0     dark </span>
+<span class="co">#&gt; 3 Lindt            0     white</span>
+<span class="co">#&gt; 4 Richart          1.63  white</span>
+<span class="co">#&gt; 5 Lindt           -0.816 dark</span></code></pre></div>
+<p>As seen above, the function applies standard scaling and centering. Each of the numeric columns will have a mean of 0 and standard deviation of 1 after the transformation. All columns with zero-variance are excluded prior to applying this transformation.</p>
 </div>
 <div id="data-splitting" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-splitting" class="anchor"></a>Data splitting</h3>
 <p>After performing the above pre-processing tasks, we are ready to move on perform data splitting. Instead of manually creating variables to hold train_set, test_set, x_train, y_train, x_test and y_test, we can simply use the <code>supervised_data</code> function. We pass it <code>toy_df</code> along with the names of <code>x</code> features or columns and the name of the <code>y</code> target column as below.</p>
-<!-- The function automatically calls [initial_split()]("https://rsample.tidymodels.org/reference/initial_split.html") from the `tidymodels` package with the default arguments and returns easy-access variables for train portion of the dataset (`train`), the test portion of the dataset (`test`), the train portion of the dataset containing `X` features only (`x_train`), the train portion of the dataset containing `y` targets only (`y_train`), the test portion of the dataset containing `X` features only (`x_test`), and the test portion of the dataset containing `y` targets only (`y_test`). You can also access the original dataset from the supervised_data object using the variable name `data`. -->
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>The function automatically calls <a href="%22https://rsample.tidymodels.org/reference/initial_split.html%22">initial_split()</a> from the <code>tidymodels</code> package with the default arguments and returns easy-access variables for train portion of the dataset (<code>train</code>), the test portion of the dataset (<code>test</code>), the train portion of the dataset containing <code>X</code> features only (<code>x_train</code>), the train portion of the dataset containing <code>y</code> targets only (<code>y_train</code>), the test portion of the dataset containing <code>X</code> features only (<code>x_test</code>), and the test portion of the dataset containing <code>y</code> targets only (<code>y_test</code>). You can also access the original dataset from the supervised_data object using the variable name <code>data</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">super_data</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/supervised_data.html">supervised_data</a></span><span class="op">(</span><span class="va">toy_df</span>,
                   xcols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'chocolate_brand'</span>, <span class="st">'type'</span><span class="op">)</span>,
                   ycol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'price'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>For example, we can quickly access the x_train portion</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">super_data</span><span class="op">$</span><span class="va">train</span>
 <span class="co">#&gt;   chocolate_brand price  type</span>
-<span class="co">#&gt; 1           Lindt     3  milk</span>
-<span class="co">#&gt; 2          Rakhat    NA  dark</span>
+<span class="co">#&gt; 1           Lindt     3  dark</span>
+<span class="co">#&gt; 2          Rakhat     4  dark</span>
 <span class="co">#&gt; 3           Lindt     4 white</span>
-<span class="co">#&gt; 4         Richart     6  milk</span></code></pre></div>
+<span class="co">#&gt; 4         Richart     6 white</span></code></pre></div>
 <p>and with just the x columns/feature</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">super_data</span><span class="op">$</span><span class="va">x_train</span>
 <span class="co">#&gt;   chocolate_brand  type</span>
-<span class="co">#&gt; 1           Lindt  milk</span>
+<span class="co">#&gt; 1           Lindt  dark</span>
 <span class="co">#&gt; 2          Rakhat  dark</span>
 <span class="co">#&gt; 3           Lindt white</span>
-<span class="co">#&gt; 4         Richart  milk</span></code></pre></div>
+<span class="co">#&gt; 4         Richart white</span></code></pre></div>
 <p>Similarly we can access the other subsets of the data</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">super_data</span><span class="op">$</span><span class="va">data</span>      <span class="co"># train portion of the dataset</span>
 <span class="va">super_data</span><span class="op">$</span><span class="va">train</span>     <span class="co"># test portion of the dataset</span>
 <span class="va">super_data</span><span class="op">$</span><span class="va">test</span>      <span class="co"># test portion of the dataset</span>
@@ -149,7 +228,7 @@
 <span class="va">super_data</span><span class="op">$</span><span class="va">x_test</span>    <span class="co"># test portion of the dataset containing `x` targets only</span>
 <span class="va">super_data</span><span class="op">$</span><span class="va">y_test</span>    <span class="co"># test portion of the dataset containing `y` targets only</span></code></pre></div>
 <p>Finally, we can customize the split by passing extra arguments to <code>supervised_data</code>. These will be passed to <code>initial_split()</code> from the <code>tidymodels</code> package. See the <a href="%22https://rsample.tidymodels.org/reference/initial_split.html%22">documentation</a> for more information.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">super_data</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/supervised_data.html">supervised_data</a></span><span class="op">(</span>
     <span class="va">toy_df</span>,
@@ -158,19 +237,19 @@
     prop <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="co"># Change split ratio to 0.5</span>
   <span class="op">)</span> </code></pre></div>
 <p>And access the subsets in the same manner described previously</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Note for datasets with sizes that result in non-integer splits, </span>
 <span class="co"># the training portion size will be rounded up and the test portion size will</span>
 <span class="co"># be rounded down as per initial_model() implementation from tidymodels</span>
 <span class="va">super_data</span><span class="op">$</span><span class="va">train</span>
-<span class="co">#&gt;   chocolate_brand price  type</span>
-<span class="co">#&gt; 2          Rakhat    NA  dark</span>
-<span class="co">#&gt; 3           Lindt     4 white</span>
-<span class="co">#&gt; 5   Not Available     3  dark</span>
-<span class="va">super_data</span><span class="op">$</span><span class="va">test</span>
 <span class="co">#&gt;   chocolate_brand price type</span>
-<span class="co">#&gt; 1           Lindt     3 milk</span>
-<span class="co">#&gt; 4         Richart     6 milk</span></code></pre></div>
+<span class="co">#&gt; 1           Lindt     3 dark</span>
+<span class="co">#&gt; 2          Rakhat     4 dark</span>
+<span class="co">#&gt; 5           Lindt     3 dark</span>
+<span class="va">super_data</span><span class="op">$</span><span class="va">test</span>
+<span class="co">#&gt;   chocolate_brand price  type</span>
+<span class="co">#&gt; 3           Lindt     4 white</span>
+<span class="co">#&gt; 4         Richart     6 white</span></code></pre></div>
 </div>
 </div>
   </div>
